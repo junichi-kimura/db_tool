@@ -1,0 +1,41 @@
+# H2
+spring.h2.console.enabled: true
+
+# flyway
+spring:
+  flyway:
+    enabled: false
+
+# Database
+spring.datasource:
+  url: 
+  driver-class-name: 
+  username: 
+  password: 
+
+logging.level.com.miragesql.miragesql: DEBUG
+
+#devtool
+spring.devtools:
+  livereload.enabled: true
+  restart.enabled: true
+
+#freemarker
+spring.freemarker:
+  cache: false
+  template-loader-path:
+    - file:src/main/resources/templates/
+    - classpath:/templates/
+  settings:
+    url_escaping_charset: UTF-8
+    number_format: 0.######
+    output_format: HTMLOutputFormat
+    lazy_auto_imports: true
+    auto_import:  "\
+      /layout/layout.ftlh as layout,
+      /layout/header.ftlh as header,
+      /layout/menu.ftlh as menu,
+      /layout/footer.ftlh as footer,
+      /utils/tag.ftlh as u,
+      /utils/spring.ftlh as spring
+    "

@@ -1,0 +1,2 @@
+INSERT INTO projects(project_name, database_type, database_host_name, database_name, database_schema, database_user, database_pass, database_port)VALUES
+('DBツール', 3, '~/db_tool;MODE=MYSQL', 'DB_TOOL', 'DB_TOOL', 'sa', '', '');
