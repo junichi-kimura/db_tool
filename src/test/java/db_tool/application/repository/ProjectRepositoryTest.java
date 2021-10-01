@@ -24,10 +24,4 @@ public class ProjectRepositoryTest extends BaseRepositoryTest<Project, ProjectRe
 		Assert.assertEquals(sqlInfo.getSql(), "SELECT * FROM projects WHERE id = ?");
 		Assert.assertEquals(sqlInfo.getParams()[0], 1L);
 	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	protected Class<Project> getClassType() {
-		return (Class<Project>) (new Project()).getClass();
-	}
 }

@@ -1,12 +1,11 @@
 package db_tool.application.repository;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.core.GenericTypeResolver;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.miragesql.miragesql.SqlManager;
@@ -35,14 +34,8 @@ public abstract class BaseRepository<T> {
 	
 	@SuppressWarnings("unchecked")
     public Class<T> getTClass() {
-		Type type = getClass().getGenericSuperclass();
-		if (type instanceof ParameterizedType) {
-			Type[] argTypes = ((ParameterizedType) type).getActualTypeArguments();
-			return (Class<T>)argTypes[0];
-		} else {
-			return null;
-			//throw new IllegalStateException();
-		}
+		Class<?>[] classTypes = GenericTypeResolver.resolveTypeArguments(getClass(), BaseRepository.class);
+		return (Class<T>) classTypes[0];
 	}
 	
 	@Transactional

@@ -8,17 +8,17 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.core.GenericTypeResolver;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.miragesql.miragesql.SqlManager;
 import com.miragesql.miragesql.test.MockSqlManager;
 
 import db_tool.AbstractTest;
-import db_tool.application.repository.BaseRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public abstract class BaseRepositoryTest<T, R extends BaseRepository<T>> extends AbstractTest {
+public class BaseRepositoryTest<T, R extends BaseRepository<T>> extends AbstractTest {
 	
 	protected SqlManager sqlManager = new MockSqlManager();
 	
@@ -31,11 +31,11 @@ public abstract class BaseRepositoryTest<T, R extends BaseRepository<T>> extends
 	@SpyBean
 	public R repository;
 	
+	@SuppressWarnings("unchecked")
 	@BeforeEach
 	public void setUp() {
 		Mockito.when(repository.getSqlManager()).thenReturn(sqlManager);
-		Mockito.when(repository.getTClass()).thenReturn(getClassType());
+		Class<?>[] classTypes = GenericTypeResolver.resolveTypeArguments(getClass(), BaseRepositoryTest.class);
+		Mockito.when(repository.getTClass()).thenReturn((Class<T>) classTypes[0]);
 	}
-	
-	protected abstract Class<T> getClassType();
 }
