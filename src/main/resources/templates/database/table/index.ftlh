@@ -26,12 +26,7 @@
           <div class="card-body">
             <div class="form-group">
             <label for="project_name">プロジェクト名</label>
-            <select class="form-control" name="projectId">
-            　　<option value="">---</option>
-            <#list searchInfo.projects as p>
-              <option value="${p.id}" <#if searchInfo.projectId?? && p.id == searchInfo.projectId>selected="selected"</#if>>${p.projectName}</option>
-            </#list>
-            </select>
+            <@u.formSingleSelect path="searchInfo.projectId" options=searchInfo.projects optionValue="projectName" id="project_id" class="form-control" name="projectId" selectedValue=searchInfo.projectId />
             </div>
             <div class="form-group">
             <label for="project_name">テーブル名</label>
@@ -56,12 +51,14 @@
             <th scope="col">コメント</th>
           </thead>
           <tbody>
+          <#if tables??>
           <#list tables as table>
           <tr class="iframe" data-cbox-href="/database/table/detail?table_id=${table.id}" data-cbox-width="90%" data-cbox-height="90%">
             <td>${table.physicalTableName}</td>
             <td>${table.tableComment}</td>
           </tr>
           </#list>
+          </#if>
           </tbody>
         </table>
         </#if>

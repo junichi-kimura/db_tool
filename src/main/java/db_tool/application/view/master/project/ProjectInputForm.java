@@ -3,15 +3,16 @@ package db_tool.application.view.master.project;
 
 import javax.validation.constraints.NotBlank;
 
+import db_tool.application.repository.ProjectRepository;
 import db_tool.domain.model.Project;
 import db_tool.domain.type.DatabaseType;
-import db_tool.domain.validate.project.ProjectId;
+import db_tool.domain.validate.project.IdExists;
 import lombok.Data;
 
 @Data
 public class ProjectInputForm {
 
-	@ProjectId
+	@IdExists(repository = ProjectRepository.class, message = "存在しないプロジェクトIDです")
 	private Long id;
 	
 	@NotBlank

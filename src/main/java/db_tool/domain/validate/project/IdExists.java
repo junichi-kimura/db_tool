@@ -8,12 +8,16 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import db_tool.application.repository.BaseRepository;
+
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ProjectIdValidator.class)
-public @interface ProjectId {
+@Constraint(validatedBy = IdValidator.class)
+public @interface IdExists {
 	String message() default "{jp.itokuro.db_tool.constraints.id.NotExists.message}";
-	  
+
+	Class<? extends BaseRepository<?>> repository();
+	
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};

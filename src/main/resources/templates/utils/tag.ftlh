@@ -34,22 +34,27 @@
     </#list>
 </#macro>
 
-<#macro formSingleSelect path options name="" id="" class="" attributes="">
+<#macro formSingleSelect path options optionValue firstEmpty=true name="" selectedValue=-1 id="" class="" attributes="">
     <@u.bind path=path/>
     <#if status.errorMessages?? && status.errorMessages?size != 0>
       <#local class = class + " is-invalid">
     </#if>
-    <select id="${id}" class="${class}" name="${name}" ${attributes}>
+    <select id="${id}" class="${class}" name="${name}" <#if attributes??>${attributes}</#if>>
         <#if options?is_hash>
+            <#if firstEmpty><option value="">---</option></#if>
             <#list options?keys as value>
-            <option value="${value}"<@checkSelected value/>>${options[value]}</option>
+            <option value="${value.id}" <#if selectedValue?? && selectedValue?string == value.id?string>selected</#if>>${options[value]}</option>
             </#list>
-        <#else> 
+        <#else>
+            <#if firstEmpty><option value="">---</option></#if>
             <#list options as value>
-            <option value="${value}"<@checkSelected value/>>${value}</option>
+            <option value="${value.id}" <#if selectedValue?? && selectedValue?string == value.id?string>selected</#if>>${value[optionValue]}</option>
             </#list>
         </#if>
     </select>
+    <#list status.errorMessages as error>
+      <span <#if id?has_content>id="${id}-error"</#if> class="error invalid-feedback" style="display:block">${error}</span>
+    </#list>
 </#macro>
 
 <#macro enumSingleSelect path enumName name selectedValue=-1 empty=true id="" class="form-control" attributes="">
