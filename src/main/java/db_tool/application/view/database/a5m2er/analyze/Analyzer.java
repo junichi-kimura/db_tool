@@ -20,13 +20,6 @@ import db_tool.domain.model.Table;
 import db_tool.domain.type.DatabaseMergeType;
 
 public class Analyzer {
-
-	public static void main(String...args) {
-		String path = System.getProperty("user.home") + File.separator + ".db_tool" + File.separator + "BPR_jyukunavi_ER_20191018.a5er";
-		File f = new File(path);
-		Analyzer analyzer = new Analyzer(f);
-		analyzer.analyze();
-	}
 	
 	private File file;
 	public Analyzer(File file) {
