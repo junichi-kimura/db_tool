@@ -14,7 +14,7 @@ import db_tool.application.repository.BaseRepository;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = IdValidator.class)
 public @interface IdExists {
-	String message() default "{jp.itokuro.db_tool.constraints.id.NotExists.message}";
+	String message() default "{db_tool.constraints.id.NotExists.message}";
 
 	Class<? extends BaseRepository<?>> repository();
 	

@@ -12,7 +12,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = ConnectedProjectIdValidator.class)
 public @interface ConnectedProjectId {
-	String message() default "{jp.itokuro.db_tool.constraints.id.NotExists.message}";
+	String message() default "{db_tool.constraints.id.NotExists.message}";
 	  
 	Class<?>[] groups() default {};
 
