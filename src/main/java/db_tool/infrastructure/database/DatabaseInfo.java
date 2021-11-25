@@ -10,6 +10,8 @@ public interface DatabaseInfo {
 	
 	public String getDatabaseName();
 	
+	public String getDatabaseSchema();
+	
 	public String getDatabaseUser();
 	
 	public String getDatabasePass();

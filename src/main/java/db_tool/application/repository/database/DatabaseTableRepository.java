@@ -48,7 +48,8 @@ public class DatabaseTableRepository {
 				selectSql = new ClasspathSqlResource("sql/database_table/findAll.mysql.sql");
 			}
 			databaseTables = sqlManager.getResultList(DatabaseTable.class, selectSql, new HashMap<String, Object>(){{
-				put("database_name", databaseInfo.getDatabaseName());
+				put("database_name", databaseInfo.getDatabaseSchema());
+				put("database_schema", databaseInfo.getDatabaseSchema());
 			}});
 			session.commit();
 		} catch (Exception e) {
@@ -80,7 +81,7 @@ public class DatabaseTableRepository {
 				break;
 			}
 			databaseColumns = sqlManager.getResultList(DatabaseColumn.class, selectSql, new HashMap<String, Object>(){{
-				put("table_schema", databaseInfo.getDatabaseName());
+				put("table_schema", databaseInfo.getDatabaseSchema());
 				put("table_name", tableName);
 			}});
 			session.commit();
@@ -113,7 +114,7 @@ public class DatabaseTableRepository {
 				break;
 			}
 			databaseReferentials = sqlManager.getResultList(DatabaseReferential.class, selectSql, new HashMap<String, Object>(){{
-				put("table_schema", databaseInfo.getDatabaseName());
+				put("table_schema", databaseInfo.getDatabaseSchema());
 			}});
 			session.commit();
 		} catch (Exception e) {
@@ -145,7 +146,7 @@ public class DatabaseTableRepository {
 				break;
 			}
 			databaseReferentialColumns = sqlManager.getResultList(DatabaseReferentialColumn.class, selectSql, new HashMap<String, Object>(){{
-				put("table_schema", databaseInfo.getDatabaseName());
+				put("table_schema", databaseInfo.getDatabaseSchema());
 				put("constraint_name", constraintName);
 				put("from_table_name", fromTableName);
 			}});
@@ -179,7 +180,7 @@ public class DatabaseTableRepository {
 				break;
 			}
 			databaseIndexes = sqlManager.getResultList(DatabaseIndex.class, selectSql, new HashMap<String, Object>(){{
-				put("table_schema", databaseInfo.getDatabaseName());
+				put("table_schema", databaseInfo.getDatabaseSchema());
 				put("table_name", tableName);
 			}});
 			session.commit();
@@ -212,7 +213,7 @@ public class DatabaseTableRepository {
 				break;
 			}
 			databaseIndexColumns = sqlManager.getResultList(DatabaseIndexColumn.class, selectSql, new HashMap<String, Object>(){{
-				put("table_schema", databaseInfo.getDatabaseName());
+				put("table_schema", databaseInfo.getDatabaseSchema());
 				put("table_name", tableName);
 				put("index_name", indexName);
 			}});

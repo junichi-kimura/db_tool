@@ -17,6 +17,8 @@ public class ProjectConnectForm implements DatabaseInfo{
 	@NotBlank
 	private String databaseName;
 	
+	private String databaseSchema;
+	
 	@NotBlank
 	private String databaseUser;
 	

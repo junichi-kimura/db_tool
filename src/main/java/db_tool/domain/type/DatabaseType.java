@@ -43,16 +43,12 @@ public enum DatabaseType implements DefaultType<Integer>{
 			return prop;
 		}
 	},
-	H2_TCP(3, "H2(TCP)", "8082", "org.h2.Driver") {
+	H2_TCP(4, "H2(TCP)", "8082", "org.h2.Driver") {
 		@Override
 		public Properties getProperties(DatabaseInfo databaseInfo) {
 			Properties prop = new Properties();
 			prop.setProperty("jdbc.driver", this.getJdbcDriver());
-			if (!this.getDefaultPort().equals(databaseInfo.getDatabasePort())) {
-				prop.setProperty("jdbc.url", "jdbc:h2://" + databaseInfo.getDatabaseHostName() + ":" + databaseInfo.getDatabasePort() + "/" + databaseInfo.getDatabaseName());
-			} else {
-				prop.setProperty("jdbc.url", "jdbc:h2://" + databaseInfo.getDatabaseHostName() + "/" + databaseInfo.getDatabaseName());
-			}
+			prop.setProperty("jdbc.url", "jdbc:h2:tcp://" + databaseInfo.getDatabaseHostName());
 			prop.setProperty("jdbc.user", databaseInfo.getDatabaseUser());
 			prop.setProperty("jdbc.password", databaseInfo.getDatabasePass());
 			return prop;
