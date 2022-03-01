@@ -48,7 +48,7 @@ public class DatabaseTableRepository {
 				selectSql = new ClasspathSqlResource("sql/database_table/findAll.mysql.sql");
 			}
 			databaseTables = sqlManager.getResultList(DatabaseTable.class, selectSql, new HashMap<String, Object>(){{
-				put("database_name", databaseInfo.getDatabaseSchema());
+				put("database_name", databaseInfo.getDatabaseName());
 				put("database_schema", databaseInfo.getDatabaseSchema());
 			}});
 			session.commit();
