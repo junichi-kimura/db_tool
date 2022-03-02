@@ -82,6 +82,7 @@ public class DatabaseTableRepository {
 			}
 			databaseColumns = sqlManager.getResultList(DatabaseColumn.class, selectSql, new HashMap<String, Object>(){{
 				put("table_schema", databaseInfo.getDatabaseSchema());
+				put("database_name", databaseInfo.getDatabaseName());
 				put("table_name", tableName);
 			}});
 			session.commit();
@@ -114,7 +115,7 @@ public class DatabaseTableRepository {
 				break;
 			}
 			databaseReferentials = sqlManager.getResultList(DatabaseReferential.class, selectSql, new HashMap<String, Object>(){{
-				put("table_schema", databaseInfo.getDatabaseSchema());
+				put("table_schema", databaseInfo.getDatabaseName());
 			}});
 			session.commit();
 		} catch (Exception e) {
@@ -146,7 +147,7 @@ public class DatabaseTableRepository {
 				break;
 			}
 			databaseReferentialColumns = sqlManager.getResultList(DatabaseReferentialColumn.class, selectSql, new HashMap<String, Object>(){{
-				put("table_schema", databaseInfo.getDatabaseSchema());
+				put("table_schema", databaseInfo.getDatabaseName());
 				put("constraint_name", constraintName);
 				put("from_table_name", fromTableName);
 			}});
