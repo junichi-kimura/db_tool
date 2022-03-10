@@ -9,5 +9,5 @@ CREATE TABLE tables(
   updated_at TIMESTAMP,
   PRIMARY KEY (id),
   FOREIGN KEY (project_id) REFERENCES projects(id),
-  CONSTRAINT tables_uq1 UNIQUE(physical_table_name)
+  CONSTRAINT tables_uq1 UNIQUE(project_id, physical_table_name)
 );
